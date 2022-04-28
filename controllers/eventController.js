@@ -17,7 +17,6 @@ const getAllApis = async (req, res, next) => {
 
 const logUser = async (req, res, next) => {
     const data = req.body;
-    console.log(data);
     try{
         const users = await eventData.login(data)
         if(users.length > 0){
