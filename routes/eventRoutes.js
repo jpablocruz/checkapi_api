@@ -11,7 +11,7 @@ const router = express.Router();
 //rutas publicas
 router.post('/auth', eventControll.logUser);
 //START TOKEN VALIDATOR
-router.use((req, res, next) => {
+/* router.use((req, res, next) => {
     const token = req.headers['access-token'];    
     if (token) {
       jwt.verify(token, app.get('llave'), (err, decoded) => {      
@@ -27,7 +27,7 @@ router.use((req, res, next) => {
           mensaje: 'Token no proveída.' 
       });
     }
-});
+}); */
 //END TOKEN VALIDATOR
 
 //rutas protegidas con el token validator
