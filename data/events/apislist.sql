@@ -1,5 +1,6 @@
 SELECT  [apiID],
         [apiCategoryID],
         [name],
-        [baseUrl]
+        [baseUrl],
+        [description]
 FROM [dbo].[API]
