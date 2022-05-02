@@ -38,7 +38,7 @@ router.post('/event', eventControll.addEvent);
 router.put('/event/:id', eventControll.updateEvent);
 router.put('/api/:id', eventControll.updateApi);
 router.delete('/event/:id', eventControll.deleteEvent);
-
+router.delete('/endpoint/:id', eventControll.deleteEndpoint);
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
