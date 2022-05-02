@@ -88,6 +88,22 @@ const updateEvent = async (eventId, data) => {
         return error.message;
     }
 }
+const updateApi = async (apiID, data) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('events');
+        const update = await pool.request()
+                        .input('apiID', sql.Int, apiID)
+                        .input('apiCategoryID', sql.Int, data.apiCategoryID)
+                        .input('name', sql.VarChar(30), data.name)
+                        .input('baseUrl', sql.VarChar(2048), data.baseUrl)
+                        .input('description', sql.VarChar(280), data.description)
+                        .query(sqlQueries.updateApi);
+        return update.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
 
 const deleteEvent = async (eventId) => {
     try {
@@ -109,5 +125,6 @@ module.exports = {
     updateEvent,
     deleteEvent,
     getApis,
+    updateApi,
     login
 }
