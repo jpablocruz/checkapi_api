@@ -68,7 +68,7 @@ const addEvent = async (req, res, next) => {
     }
 }
 
-const updatEvent = async (req, res, next) => {
+const updateEvent = async (req, res, next) => {
     try {
         const eventId =  req.params.id;
         const data = req.body;
@@ -78,7 +78,16 @@ const updatEvent = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
-
+const updateApi = async (req, res, next) => {
+    try {
+        const apiID =  req.params.id;
+        const data = req.body;
+        const updated = await eventData.updateApi(apiID, data);
+        res.send(updated);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+} 
 const deleteEvent = async (req, res, next) => {
     try {
         const eventId = req.params.id;
@@ -89,12 +98,25 @@ const deleteEvent = async (req, res, next) => {
     }
 }
 
+const deleteEndpoint = async (req, res, next) => {
+    try {
+        const endpointID = req.params.id;
+        const deletedApi = await eventData.deleteEndpoint(endpointID);
+        res.send(deletedApi);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
 module.exports = {
     getAllEvents,
     getEvent,
     addEvent,
-    updatEvent,
+    updateEvent,
     deleteEvent,
     getAllApis,
+    updateApi,
+    deleteEndpoint,
     logUser
 }
