@@ -108,6 +108,14 @@ const deleteEndpoint = async (req, res, next) => {
     }
 }
 
+const getAllCategories = async (req, res, next) => {
+    try {
+        const categorylist = await eventData.getCategories();
+        res.send(categorylist);        
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 
 module.exports = {
     getAllEvents,
@@ -118,5 +126,6 @@ module.exports = {
     getAllApis,
     updateApi,
     deleteEndpoint,
-    logUser
+    logUser,
+    getAllCategories,
 }

@@ -2,6 +2,7 @@
 
 const express = require('express'),jwt = require('jsonwebtoken');
 const eventControll = require('../controllers/eventController');
+const categoryController = require('../controllers/categoryController');
 const config = require('../config');
 const app = express();
 
@@ -39,6 +40,7 @@ router.put('/event/:id', eventControll.updateEvent);
 router.put('/api/:id', eventControll.updateApi);
 router.delete('/event/:id', eventControll.deleteEvent);
 router.delete('/endpoint/:id', eventControll.deleteEndpoint);
+router.get('/categories', eventControll.getAllCategories);
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
