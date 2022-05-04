@@ -1,5 +1,4 @@
 SELECT  [apiID],
-        [apiCategoryID],
         [name],
         [baseUrl],
         [description]
