@@ -1,3 +1,3 @@
-SELECT [apiCategoryID],
+SELECT [categoryID],
        [name]
-FROM [dbo].[APICategory]
+FROM [dbo].[Category]
