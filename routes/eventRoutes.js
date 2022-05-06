@@ -4,6 +4,7 @@ const express = require('express'),jwt = require('jsonwebtoken');
 const eventControll = require('../controllers/eventController');
 const categoryController = require('../controllers/categoryController');
 const groupController = require('../controllers/groupController');
+const filteredAPIs = require('../controllers/filtered-apisController');
 const config = require('../config');
 const app = express();
 
@@ -12,6 +13,7 @@ app.set('llave', config.llave);
 const router = express.Router(); 
 //rutas publicas
 router.post('/auth', eventControll.logUser);
+
 //START TOKEN VALIDATOR
 /* router.use((req, res, next) => {
     const token = req.headers['access-token'];    
@@ -43,6 +45,7 @@ router.delete('/event/:id', eventControll.deleteEvent);
 router.delete('/endpoint/:id', eventControll.deleteEndpoint);
 router.get('/categories', eventControll.getAllCategories);
 router.get('/groups/:id', groupController.getEndpointGroups);
+router.get('/categories/:id', filteredAPIs.getAPIsByCategories);
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
