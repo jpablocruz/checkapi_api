@@ -53,6 +53,19 @@ const getById = async(eventId) => {
     }
 }
 
+const getApiById = async(apiID) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('events');
+        const event = await pool.request()
+                            .input('apiID', sql.Int, apiID)
+                            .query(sqlQueries.apibyId);
+        return event.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 const creatEvent = async (eventdata) => {
     try {
         let pool = await sql.connect(config.sql);
@@ -155,4 +168,5 @@ module.exports = {
     deleteEndpoint,
     login,
     getCategories,
+    getApiById,
 }

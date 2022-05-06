@@ -46,6 +46,7 @@ router.delete('/endpoint/:id', eventControll.deleteEndpoint);
 router.get('/categories', eventControll.getAllCategories);
 router.get('/groups/:id', groupController.getEndpointGroups);
 router.get('/categories/:id', filteredAPIs.getAPIsByCategories);
+router.get('/api/:id',eventControll.getApi);
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
