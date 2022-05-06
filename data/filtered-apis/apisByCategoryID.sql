@@ -4,4 +4,4 @@ SELECT  API.[apiID],
         API.[description]
 FROM dbo.API
 LEFT JOIN dbo.CategoryAPI ON API.apiID = CategoryAPI.apiID
-WHERE CategoryAPI.categoryID = 3;
+WHERE CategoryAPI.categoryID = @categoryID;
