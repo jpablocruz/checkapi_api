@@ -47,6 +47,7 @@ router.get('/categories', eventControll.getAllCategories);
 router.get('/groups/:id', groupController.getEndpointGroups);
 router.get('/categories/:id', filteredAPIs.getAPIsByCategories);
 router.get('/api/:id',eventControll.getApi);
+router.get('/endpoint/:id', groupController.getEndpoint);
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
