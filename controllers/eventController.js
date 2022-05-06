@@ -117,6 +117,16 @@ const getAllCategories = async (req, res, next) => {
     }
 }
 
+const getApi = async (req, res, next) => {
+    try {
+        const apiID = req.params.id;
+        const event = await eventData.getApiById(apiID);
+        res.send(event);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports = {
     getAllEvents,
     getEvent,
@@ -128,4 +138,5 @@ module.exports = {
     deleteEndpoint,
     logUser,
     getAllCategories,
+    getApi,
 }
