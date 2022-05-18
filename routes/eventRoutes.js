@@ -48,6 +48,7 @@ router.get('/groups/:id', groupController.getEndpointGroups);
 router.get('/categories/:id', filteredAPIs.getAPIsByCategories);
 router.get('/api/:id',eventControll.getApi);
 router.get('/endpoint/:id', groupController.getEndpoint);
+router.get('/api/users', eventControll.getAllUsers);
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
