@@ -36,7 +36,7 @@ router.post('/auth', eventControll.logUser);
 
 //rutas protegidas con el token validator
 router.get('/events',eventControll.getAllEvents);
-router.get('/apis', eventControll.getAllApis);
+router.get('/apis/:id', eventControll.getAllApis); //added :id to filter by userID favs
 router.get('/event/:id', eventControll.getEvent);
 router.post('/event', eventControll.addEvent);
 router.put('/event/:id', eventControll.updateEvent);
