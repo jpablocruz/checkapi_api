@@ -8,7 +8,8 @@ app.set('llave', config.llave);
 
 const getAllApis = async (req, res, next) => {
     try {
-        const apilist = await eventData.getApis();
+        const userID = req.params.id;
+        const apilist = await eventData.getApis(userID);
         res.send(apilist);        
     } catch (error) {
         res.status(400).send(error.message);
