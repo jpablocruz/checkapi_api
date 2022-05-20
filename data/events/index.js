@@ -147,7 +147,7 @@ const deleteEvent = async (eventId) => {
 const getCategories = async () => {
     try {
         let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('categories');
+        const sqlQueries = await utils.loadSqlQueries('events');
         const categoriesList = await pool.request().query(sqlQueries.categoryList);
         console.log(categoriesList.recordset);
         return categoriesList.recordset;
@@ -155,6 +155,19 @@ const getCategories = async () => {
         console.log(error.message);
     }
 }
+
+const getUsers = async () => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('events');
+        const userList = await pool.request().query(sqlQueries.completeUserList);
+        console.log(userList.recordset);
+        return userList.recordset;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 
 
 module.exports = {
@@ -169,4 +182,5 @@ module.exports = {
     login,
     getCategories,
     getApiById,
+    getUsers,
 }

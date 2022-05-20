@@ -15,6 +15,15 @@ const getAllApis = async (req, res, next) => {
     }
 }
 
+const getAllUsers = async (req, res, next) => {
+    try {
+        const userList = await eventData.getUsers();
+        res.send(userList);        
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 const logUser = async (req, res, next) => {
     const data = req.body;
     try{
@@ -139,4 +148,5 @@ module.exports = {
     logUser,
     getAllCategories,
     getApi,
+    getAllUsers,
 }
