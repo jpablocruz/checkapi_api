@@ -147,7 +147,7 @@ const deleteEvent = async (eventId) => {
 const getCategories = async () => {
     try {
         let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('events');
+        const sqlQueries = await utils.loadSqlQueries('categories');
         const categoriesList = await pool.request().query(sqlQueries.categoryList);
         console.log(categoriesList.recordset);
         return categoriesList.recordset;
