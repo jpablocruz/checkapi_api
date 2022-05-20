@@ -14,11 +14,13 @@ const getEvents = async () => {
     }
 }
 
-const getApis = async () => {
+const getApis = async (userID) => {
     try{
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('events');
-        const apisList = await pool.request().query(sqlQueries.apislist);
+        const apisList = await pool.request()
+            .input('userID', sql.Int, userID)
+            .query(sqlQueries.apislist);
         console.log(apisList);
         return apisList.recordset;
     }catch(error){
@@ -161,7 +163,7 @@ const deleteEvent = async (eventId) => {
 const getCategories = async () => {
     try {
         let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('events');
+        const sqlQueries = await utils.loadSqlQueries('categories');
         const categoriesList = await pool.request().query(sqlQueries.categoryList);
         console.log(categoriesList.recordset);
         return categoriesList.recordset;
