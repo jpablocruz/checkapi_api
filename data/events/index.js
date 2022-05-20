@@ -119,6 +119,20 @@ const updateApi = async (apiID, data) => {
     }
 }
 
+const updateUser = async (userID, data) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('events');
+        const update = await pool.request()
+                        .input('userID', sql.Int, userID)
+                        .input('role', sql.VarChar(32), data.role)
+                        .query(sqlQueries.updateUser);
+        return update.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 const deleteEndpoint = async (endpointID) => {
     try {
         let pool = await sql.connect(config.sql);
@@ -183,4 +197,5 @@ module.exports = {
     getCategories,
     getApiById,
     getUsers,
+    updateUser,
 }

@@ -24,6 +24,17 @@ const getAllUsers = async (req, res, next) => {
     }
 }
 
+const updateUserRole = async (req, res, next) => {
+    try {
+        const userID =  req.params.id;
+        const data = req.body;
+        const updated = await eventData.updateUser(userID, data);
+        res.send(updated);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 const logUser = async (req, res, next) => {
     const data = req.body;
     try{
@@ -149,4 +160,5 @@ module.exports = {
     getAllCategories,
     getApi,
     getAllUsers,
+    updateUserRole,
 }
