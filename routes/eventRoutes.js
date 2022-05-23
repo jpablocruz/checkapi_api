@@ -49,7 +49,7 @@ router.get('/categories/:id', filteredAPIs.getAPIsByCategories);
 router.get('/api/:id',eventControll.getApi);
 router.get('/endpoint/:id', groupController.getEndpoint);
 router.get('/users', eventControll.getAllUsers);
-router.put('/user/:id', eventControll.updateUserRole); 
+router.put('/userUpdate', eventControll.updateUserRole); 
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
