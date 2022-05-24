@@ -9,7 +9,8 @@ app.set('llave', config.llave);
 const getAPIsByCategories = async (req, res, next) => {
     try {
         const categoryID = req.params.id;
-        const filteredAPIs = await eventData.getAPIsByCategoryID(categoryID);
+        const userID = req.params.user_id;
+        const filteredAPIs = await eventData.getAPIsByCategoryID(categoryID, userID);
         res.send(filteredAPIs);
     } catch (error) {
         res.status(400).send(error.message);
