@@ -184,6 +184,34 @@ const getUsers = async () => {
     }
 }
 
+const createFavorite = async (eventdata) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('events');
+        const insertFavorite = await pool.request()
+                            .input('apiID', sql.Int, eventdata.apiID)
+                            .input('userID', sql.Int, eventdata.userID)
+                            .query(sqlQueries.addFavorite);                            
+        return insertFavorite.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+const deleteFavorite = async (eventdata) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('events');
+        const deleteFavorite = await pool.request()
+                            .input('apiID', sql.Int, eventdata.apiID)
+                            .input('userID', sql.Int, eventdata.userID)
+                            .query(sqlQueries.deleteFav);
+        return deleteFavorite.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 
 
 module.exports = {
@@ -200,4 +228,6 @@ module.exports = {
     getApiById,
     getUsers,
     updateUser,
+    createFavorite,
+    deleteFavorite,
 }

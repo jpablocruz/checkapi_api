@@ -49,6 +49,7 @@ const logUser = async (req, res, next) => {
                 res.json({
                 mensaje: 'Autenticación correcta',
                 token: token
+                
             });
         }else{
             res.json({
@@ -147,6 +148,25 @@ const getApi = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+const addFavorite = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const insert = await eventData.createFavorite(data);
+        res.send(insert);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const deleteFavorite = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const deletedFav = await eventData.deleteFavorite(data);
+        res.send(deletedFav);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 
 module.exports = {
     getAllEvents,
@@ -162,4 +182,6 @@ module.exports = {
     getApi,
     getAllUsers,
     updateUserRole,
+    addFavorite,
+    deleteFavorite,
 }
