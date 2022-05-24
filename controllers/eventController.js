@@ -46,12 +46,15 @@ const logUser = async (req, res, next) => {
                 const token = jwt.sign(payload, app.get('llave'), {
                 //expiresIn: 1400 sin el expiresIn el token es infinito
                 });
-                res.json({
-                mensaje: 'Autenticación correcta',
-                email: users[0].email,
-                role: users[0].role,
-                token: token
-            });
+                res.json(
+                    {
+                        mensaje: 'Autenticación correctisima',
+                        email: users[0].email,
+                        role: users[0].role,
+                        token: token,
+                        userID: users[0].userID
+                    }
+            );
         }else{
             res.json({
                  mensaje: "Usuario o contraseña incorrectos"
