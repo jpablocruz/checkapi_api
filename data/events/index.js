@@ -2,6 +2,7 @@
 const utils = require('../utils');
 const config = require('../../config');
 const sql = require('mssql');
+const res = require('express/lib/response');
 
 const getEvents = async () => {
     try {
@@ -128,10 +129,12 @@ const updateUser = async (userID, data) => {
         const update = await pool.request()
                         .input('userID', sql.Int, userID)
                         .input('role', sql.VarChar(32), data.role)
-                        .query(sqlQueries.updateUser);
+                        .input('email', sql.VarChar(64), data.email)
+                        .query("UPDATE [dbo].[Users] SET role = @role WHERE userID in (SELECT userID from [dbo].[Users] WHERE email = @email)");
         return update.recordset;
     } catch (error) {
         return error.message;
+        
     }
 }
 

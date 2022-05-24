@@ -52,6 +52,7 @@ router.get('/users', eventControll.getAllUsers);
 router.put('/user/:id', eventControll.updateUserRole);
 router.post('/favorite', eventControll.addFavorite); 
 router.delete('/favorite', eventControll.deleteFavorite);
+router.put('/userUpdate', eventControll.updateUserRole); 
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...

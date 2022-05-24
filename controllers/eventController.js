@@ -48,8 +48,9 @@ const logUser = async (req, res, next) => {
                 });
                 res.json({
                 mensaje: 'Autenticación correcta',
+                email: users[0].email,
+                role: users[0].role,
                 token: token
-                
             });
         }else{
             res.json({
