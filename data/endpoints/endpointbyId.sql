@@ -4,15 +4,9 @@ SELECT Groups.name
     ,Endpoint.methodType
     ,Endpoint.lastResp
     ,Endpoint.[status]
-    ,Parameter.dataType
-    ,Parameter.paramName
-    ,Parameter.isRequired
-    ,Parameter.paramDescription
     ,ResponseCode.number
     ,ResponseCode.respDescription
 FROM Endpoint
-JOIN Parameter 
-    ON Endpoint.paramID = Parameter.paramID
 JOIN ResponseCode
     ON Endpoint.respCodeID = ResponseCode.respCodeID
 JOIN Groups

@@ -24,8 +24,18 @@ const getEndpoint = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+const getEndpointParameters = async (req, res, next) => {
+    try {
+        const endpointID = req.params.id;
+        const endpointParams = await endpointData.getParametersbyEndpointID(endpointID);
+        res.send(endpointParams);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 
 module.exports = {
     getEndpointGroups,
     getEndpoint,
+    getEndpointParameters,
 }
