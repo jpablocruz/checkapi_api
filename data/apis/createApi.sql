@@ -1,20 +1,18 @@
 INSERT INTO [dbo].[API]
     (
-        [apiCategoryID],
         [name],
         [baseUrl],
         [description],
         [status],
-        [isFavorite]
+        [isEnabled]
     )
 VALUES 
     (
-        @apiCategoryID,
         @name,
         @baseUrl,
         @description,
-        @status,
-        @isFavorite
+        1, 
+        1
     )
 
 SELECT SCOPE_IDENTITY() AS apiID

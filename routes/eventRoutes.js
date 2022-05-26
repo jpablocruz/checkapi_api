@@ -4,6 +4,7 @@ const express = require('express'),jwt = require('jsonwebtoken');
 const eventControll = require('../controllers/eventController');
 const categoryController = require('../controllers/categoryController');
 const groupController = require('../controllers/groupController');
+const addApiController = require('../controllers/addApiController');
 const filteredAPIs = require('../controllers/filtered-apisController');
 const config = require('../config');
 const app = express();
@@ -54,6 +55,7 @@ router.post('/favorite', eventControll.addFavorite);
 router.delete('/favorite', eventControll.deleteFavorite);
 router.put('/userUpdate', eventControll.updateUserRole); 
 router.get('/endpoint/params/:id',groupController.getEndpointParameters)
+router.post('/api',addApiController.addApi)
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
