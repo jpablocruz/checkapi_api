@@ -1,5 +1,5 @@
 SELECT  [email],
         [firstName],
-        [lastNme],
+        [lastName],
         [role]
 FROM [dbo].[Users]
