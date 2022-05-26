@@ -9,6 +9,7 @@ SELECT  [apiID],
         ) 
         THEN 1
         ELSE 0
-        END )
+        END ),
+        [isEnabled]
 FROM [dbo].[API] as A
 ORDER BY isFavorite DESC, name;

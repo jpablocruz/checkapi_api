@@ -9,7 +9,8 @@ SELECT  A.[apiID],
         )
         THEN 1
         ELSE 0
-        END )
+        END ),
+        [isEnabled]
 FROM [dbo].[API] as A
 LEFT JOIN dbo.CategoryAPI ON A.apiID = CategoryAPI.apiID
 WHERE CategoryAPI.categoryID = @categoryID
