@@ -1,5 +1,5 @@
-# API de CheckApi :cowboy_hat_face:
+# API de CheckApi
 Proyecto de BackEnd para la aplicacion de CheckAPI.
 
-:ram: 🦚 Implementada utilizando NodeJs y Express. :peacock: :ram:
+ Implementada utilizando NodeJs y Express. 
 
