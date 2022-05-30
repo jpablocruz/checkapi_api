@@ -16,13 +16,28 @@ const createApi = async (apiData) => {
                             .input('status', sql.Bit, apiData.status)
                             .input('isEnabled', sql.Bit, apiData.isEnabled)
                             .query(sqlQueries.createApi);                            
-        return insertApi.recordset;
+        return insertApi.recordset[0];
+    } catch (error) {
+        return error.message;
+    }
+}
+const addApiCategoryAssociation = async (apiData) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('apis');
+        const insertApiCatAssociation = await pool.request()
+                            .input('apiID', sql.Int, apiData.apiID)
+                            .input('categoryID', sql.Int, apiData.categoryID)
+                            .query(sqlQueries.createApiCatRel);                            
+        return insertApiCatAssociation.recordset;
     } catch (error) {
         return error.message;
     }
 }
 
+
 module.exports = {
-    createApi
+    createApi,
+    addApiCategoryAssociation
 }
 

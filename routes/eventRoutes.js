@@ -56,6 +56,7 @@ router.delete('/favorite', eventControll.deleteFavorite);
 router.put('/userUpdate', eventControll.updateUserRole); 
 router.get('/endpoint/params/:id',groupController.getEndpointParameters)
 router.post('/api',addApiController.addApi)
+router.post('/category_api',addApiController.addApiCatRel)
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...

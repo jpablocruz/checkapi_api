@@ -22,7 +22,6 @@ const getApis = async (userID) => {
         const apisList = await pool.request()
             .input('userID', sql.Int, userID)
             .query(sqlQueries.apislist);
-        console.log(apisList);
         return apisList.recordset;
     }catch(error){
         console.log(error.message);
@@ -36,7 +35,6 @@ const login = async (data) => {
         const users = await pool.request()
                 .input('email', sql.VarChar(64), data.email)
                 .query(sqlQueries.userList);
-        //console.log(users.recordset);
         return users.recordset;
     }catch(error){
         console.log(error.message);
@@ -168,7 +166,6 @@ const getCategories = async () => {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('categories');
         const categoriesList = await pool.request().query(sqlQueries.categoryList);
-        console.log(categoriesList.recordset);
         return categoriesList.recordset;
     } catch (error) {
         console.log(error.message);
@@ -180,7 +177,6 @@ const getUsers = async () => {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('events');
         const userList = await pool.request().query(sqlQueries.completeUserList);
-        console.log(userList.recordset);
         return userList.recordset;
     } catch (error) {
         console.log(error.message);

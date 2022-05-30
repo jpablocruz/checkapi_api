@@ -16,7 +16,17 @@ const addApi = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+const addApiCatRel = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const insert = await apiData.addApiCategoryAssociation(data);
+        res.send(insert);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 
 module.exports = {
     addApi,
+    addApiCatRel
 }
