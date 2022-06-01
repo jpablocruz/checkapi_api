@@ -6,6 +6,7 @@ const categoryController = require('../controllers/categoryController');
 const groupController = require('../controllers/groupController');
 const addApiController = require('../controllers/addApiController');
 const filteredAPIs = require('../controllers/filtered-apisController');
+const addEndpointController = require('../controllers/addEndpointController');
 const config = require('../config');
 const app = express();
 
@@ -57,6 +58,7 @@ router.put('/userUpdate', eventControll.updateUserRole);
 router.get('/endpoint/params/:id',groupController.getEndpointParameters)
 router.post('/api',addApiController.addApi)
 router.post('/category_api',addApiController.addApiCatRel)
+router.post('/endpoint',addEndpointController.addEndpoint)
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...

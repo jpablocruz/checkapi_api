@@ -39,8 +39,26 @@ const getParametersbyEndpointID = async(endpointID) => {
         return error.message;
     }
 }
+const createEndpoint = async (endpointData) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const insertEndpoint = await pool.request()
+                            .input('respCodeID', sql.Int, endpointData.respCodeID)
+                            .input('groupID', sql.Int, endpointData.groupID)
+                            .input('methodType', sql.VarChar(6), endpointData.methodType)
+                            .input('path', sql.VarChar(64), endpointData.path)
+                            .input('endpointDescription', sql.VarChar(280), endpointData.endpointDescription)
+                            .query(sqlQueries.createEndpoint);                            
+        return insertEndpoint.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = {
     getGroupById,
     getEndpointById,
-    getParametersbyEndpointID
+    getParametersbyEndpointID,
+    createEndpoint
 }
