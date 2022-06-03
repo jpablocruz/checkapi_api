@@ -49,9 +49,23 @@ const toggleApiVisibility = async (apiData) => {
 }
 
 
+const deleteApi = async (apiID) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('apis');
+        const deletedApi = await pool.request()
+                            .input('apiID', sql.Int, apiID)
+                            .query(sqlQueries.deleteApi);
+        return deletedApi.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = {
     createApi,
     addApiCategoryAssociation,
-    toggleApiVisibility
+    toggleApiVisibility,
+    deleteApi,
 }
 

@@ -9,6 +9,7 @@ const filteredAPIs = require('../controllers/filtered-apisController');
 const addEndpointController = require('../controllers/addEndpointController');
 const config = require('../config');
 const toggleApiVisibilityController = require('../controllers/toggleApiVisibilityController');
+const  deleteApiController = require('../controllers/deleteApiController');
 const app = express();
 
 app.set('llave', config.llave);
@@ -61,6 +62,7 @@ router.post('/api',addApiController.addApi)
 router.post('/category_api',addApiController.addApiCatRel)
 router.post('/endpoint',addEndpointController.addEndpoint)
 router.put('/api_visibility',toggleApiVisibilityController.updateApiVisibility)
+router.delete('/delete_api/:id', deleteApiController.deleteApi)
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
