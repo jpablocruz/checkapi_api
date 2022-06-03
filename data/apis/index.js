@@ -34,10 +34,24 @@ const addApiCategoryAssociation = async (apiData) => {
         return error.message;
     }
 }
+const toggleApiVisibility = async (apiData) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('apis');
+        const update = await pool.request()
+                        .input('apiID', sql.Int, apiData.apiID)
+                        .input('isEnabled', sql.Bit, apiData.isEnabled)
+                        .query(sqlQueries.toggleEnable);
+        return update.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
 
 
 module.exports = {
     createApi,
-    addApiCategoryAssociation
+    addApiCategoryAssociation,
+    toggleApiVisibility
 }
 
