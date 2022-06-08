@@ -1,6 +1,7 @@
 'use strict';
 
 const endpointData = require('../data/endpoints');
+const groupsData = require('../data/groups');
 const express = require('express'),jwt = require('jsonwebtoken');
 const config = require('../config');
 const app = express();
@@ -34,8 +35,21 @@ const getEndpointParameters = async (req, res, next) => {
     }
 }
 
+const getGroupsbyId = async (req, res, next) => {
+    try
+    {
+        const apiID = req.params.id;
+        const apiGroups = await groupsData.getGroups(apiID);
+        res.send(apiGroups);
+    }
+    catch (error){
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports = {
     getEndpointGroups,
     getEndpoint,
     getEndpointParameters,
+    getGroupsbyId
 }
