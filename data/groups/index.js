@@ -16,6 +16,23 @@ const getGroups = async (apiID) => {
     }
 }
 
+const createGroup = async (groupData) => {
+    try
+    {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('groups');
+        const response = await pool.request()
+                                    .input('name', sql.VarChar(64), groupData.name)
+                                    .input('apiID', sql.Int, groupData.apiID)
+                                    .query(sqlQueries.createGroups);
+        return response.recordset;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
-    getGroups
+    getGroups,
+    createGroup
 }

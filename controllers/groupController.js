@@ -16,6 +16,7 @@ const getEndpointGroups = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+
 const getEndpoint = async (req, res, next) => {
     try {
         const endpointID = req.params.id;
@@ -25,6 +26,7 @@ const getEndpoint = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+
 const getEndpointParameters = async (req, res, next) => {
     try {
         const endpointID = req.params.id;
@@ -35,6 +37,7 @@ const getEndpointParameters = async (req, res, next) => {
     }
 }
 
+//groups endpoints 
 const getGroupsbyId = async (req, res, next) => {
     try
     {
@@ -47,9 +50,21 @@ const getGroupsbyId = async (req, res, next) => {
     }
 }
 
+const addGroup = async (req, res, next) => {
+    try {
+        const data = req.params.body
+        const insertion = await groupsData.createGroup(data)
+        res.send(insertion);
+    }
+    catch(error){
+        res.status(400).send(error.message)
+    }
+}
+
 module.exports = {
     getEndpointGroups,
     getEndpoint,
     getEndpointParameters,
-    getGroupsbyId
+    getGroupsbyId,
+    addGroup
 }
