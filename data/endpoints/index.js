@@ -56,9 +56,23 @@ const createEndpoint = async (endpointData) => {
     }
 }
 
+const getEndpointsByGroup = async (groupID) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const endpointList = await pool.request()
+                                        .input('groupID', sql.Int, groupID)
+                                        .query(sqlQueries.endpointsByGroup);
+        return endpointList.recordset;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 module.exports = {
     getGroupById,
     getEndpointById,
     getParametersbyEndpointID,
-    createEndpoint
+    createEndpoint,
+    getEndpointsByGroup
 }

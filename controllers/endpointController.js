@@ -6,7 +6,6 @@ const config = require('../config');
 const app = express();
 app.set('llave', config.llave);
 
-
 const addEndpoint = async (req, res, next) => {
     try {
         const data = req.body;
@@ -17,6 +16,19 @@ const addEndpoint = async (req, res, next) => {
     }
 }
 
+const getEndpointsByGroupId = async (req, res, next) => {
+    try
+    {
+        const groupID = req.params.id;
+        const endpoints = await endpointData.getEndpointsByGroup(groupID);
+        res.send(endpoints);
+    }
+    catch (error){
+        res.status(400).send(error.message);
+    }
+};
+
 module.exports = {
     addEndpoint,
+    getEndpointsByGroupId
 }

@@ -6,7 +6,7 @@ const categoryController = require('../controllers/categoryController');
 const groupController = require('../controllers/groupController');
 const addApiController = require('../controllers/addApiController');
 const filteredAPIs = require('../controllers/filtered-apisController');
-const addEndpointController = require('../controllers/addEndpointController');
+const EndpointController = require('../controllers/endpointController');
 const config = require('../config');
 const toggleApiVisibilityController = require('../controllers/toggleApiVisibilityController');
 const  deleteApiController = require('../controllers/deleteApiController');
@@ -60,7 +60,7 @@ router.put('/userUpdate', eventControll.updateUserRole);
 router.get('/endpoint/params/:id',groupController.getEndpointParameters)
 router.post('/api',addApiController.addApi)
 router.post('/category_api',addApiController.addApiCatRel)
-router.post('/endpoint',addEndpointController.addEndpoint)
+router.post('/endpoint',EndpointController.addEndpoint)
 router.put('/api_visibility',toggleApiVisibilityController.updateApiVisibility)
 router.delete('/delete_api/:id', deleteApiController.deleteApi)
 //RUTAS API
@@ -69,6 +69,7 @@ router.delete('/delete_api/:id', deleteApiController.deleteApi)
 
 //RUTAS DE GROUPS 
 router.get('/api_groups/:id', groupController.getGroupsbyId)
+router.get('/group/:id/endpoints', EndpointController.getEndpointsByGroupId)
 
 module.exports = {
     routes: router
