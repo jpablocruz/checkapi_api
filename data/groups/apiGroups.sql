@@ -1,4 +1,4 @@
 SELECT 
-    [GroupID],
+    [groupID],
     [name]
 FROM Groups WHERE apiID = @apiID
