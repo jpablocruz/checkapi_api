@@ -66,10 +66,12 @@ router.delete('/delete_api/:id', deleteApiController.deleteApi)
 //RUTAS API
 
 //RUTAS ENDPOINTS ETC...
+router.get('/group/:id/endpoints', EndpointController.getEndpointsByGroupId);
 
 //RUTAS DE GROUPS 
-router.get('/api_groups/:id', groupController.getGroupsbyId)
-router.get('/group/:id/endpoints', EndpointController.getEndpointsByGroupId)
+router.get('/api_groups/:id', groupController.getGroupsbyId);
+router.post('/group', groupController.addGroup);
+
 
 module.exports = {
     routes: router
