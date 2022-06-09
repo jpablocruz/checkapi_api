@@ -6,5 +6,7 @@ INSERT INTO [dbo].[Groups]
 VALUES 
     (
         @name,
-        @apiID,
+        @apiID
     );
+
+SELECT SCOPE_IDENTITY() AS groupID

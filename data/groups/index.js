@@ -21,14 +21,19 @@ const createGroup = async (groupData) => {
     {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('groups');
-        const response = await pool.request()
-                                    .input('name', sql.VarChar(64), groupData.name)
+        console.log(groupData.name+ "  " + groupData.apiID)
+        const insertGroup = await pool.request()
+                                    .input('name', sql.VarChar(30), groupData.name)
                                     .input('apiID', sql.Int, groupData.apiID)
-                                    .query(sqlQueries.createGroups);
-        return response.recordset;
+                                    .query(sqlQueries.createGroup);
+        return {
+                hasError: false,
+                message: "group added susccesfully",
+                response: insertGroup.recordset
+        }
     }
     catch(error){
-        console.log(error);
+        console.log(error.message);
     }
 }
 

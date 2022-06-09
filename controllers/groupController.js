@@ -52,14 +52,15 @@ const getGroupsbyId = async (req, res, next) => {
 
 const addGroup = async (req, res, next) => {
     try {
-        const data = req.params.body
-        const insertion = await groupsData.createGroup(data)
-        res.send(insertion);
+        const data = req.body
+        const insert = await groupsData.createGroup(data)
+        res.send(insert);
     }
     catch(error){
         res.status(400).send(error.message)
     }
 }
+
 
 module.exports = {
     getEndpointGroups,
