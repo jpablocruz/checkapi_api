@@ -50,11 +50,44 @@ const createEndpoint = async (endpointData) => {
                             .input('path', sql.VarChar(64), endpointData.path)
                             .input('endpointDescription', sql.VarChar(280), endpointData.endpointDescription)
                             .query(sqlQueries.createEndpoint);                            
-        return insertEndpoint.recordset;
+        return insertEndpoint.recordset[0];
     } catch (error) {
         return error.message;
     }
 }
+
+
+const createParameter = async (paramData) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const insertParemeter = await pool.request()
+                            .input('dataType', sql.VarChar(32), paramData.dataType)
+                            .input('paramName', sql.VarChar(32), paramData.paramName)
+                            .input('isRequired', sql.Bit, paramData.isRequired)
+                            .input('paramDescription', sql.VarChar(32), paramData.paramDescription)
+                            .query(sqlQueries.createParameter);                            
+        return insertParemeter.recordset[0];
+    } catch (error) {
+        return error.message;
+    }
+}
+
+const createEndpointParamRel = async (paramData) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const insertParemeter = await pool.request()
+                            .input('paramID', sql.Int, paramData.paramID)
+                            .input('endpointID', sql.Int, paramData.endpointID)
+                            .query(sqlQueries.createParameterEndpointRel);                            
+        return insertParemeter.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+
 
 const getEndpointsByGroup = async (groupID) => {
     try {
@@ -74,5 +107,7 @@ module.exports = {
     getEndpointById,
     getParametersbyEndpointID,
     createEndpoint,
-    getEndpointsByGroup
+    getEndpointsByGroup,
+    createParameter,
+    createEndpointParamRel
 }

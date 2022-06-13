@@ -67,6 +67,8 @@ router.delete('/delete_api/:id', deleteApiController.deleteApi)
 
 //RUTAS ENDPOINTS ETC...
 router.get('/group/:id/endpoints', EndpointController.getEndpointsByGroupId);
+router.post('/parameter',EndpointController.addParameter);
+router.post('/paramEndpoint',EndpointController.addEndpointParamRel);
 
 //RUTAS DE GROUPS 
 router.get('/api_groups/:id', groupController.getGroupsbyId);

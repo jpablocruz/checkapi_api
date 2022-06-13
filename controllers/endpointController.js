@@ -1,6 +1,7 @@
 'use strict';
 
 const endpointData = require('../data/endpoints');
+const paramData = require('../data/endpoints');
 const express = require('express'),jwt = require('jsonwebtoken');
 const config = require('../config');
 const app = express();
@@ -16,6 +17,27 @@ const addEndpoint = async (req, res, next) => {
     }
 }
 
+const addParameter = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const insert = await paramData.createParameter(data);
+        res.send(insert);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const addEndpointParamRel = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const insert = await paramData.createEndpointParamRel(data);
+        res.send(insert);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
 const getEndpointsByGroupId = async (req, res, next) => {
     try
     {
@@ -30,5 +52,7 @@ const getEndpointsByGroupId = async (req, res, next) => {
 
 module.exports = {
     addEndpoint,
-    getEndpointsByGroupId
+    getEndpointsByGroupId,
+    addParameter,
+    addEndpointParamRel
 }
