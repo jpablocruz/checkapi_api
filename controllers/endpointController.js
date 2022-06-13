@@ -50,9 +50,22 @@ const getEndpointsByGroupId = async (req, res, next) => {
     }
 };
 
+const getRespCodesByEndpointID = async (req, res, next) => {
+    try
+    {
+        const endpointID = req.params.id;
+        const endpoints = await endpointData.getRespCodesByEndpointID(endpointID);
+        res.send(endpoints);
+    }
+    catch (error){
+        res.status(400).send(error.message);
+    }
+};
+
 module.exports = {
     addEndpoint,
     getEndpointsByGroupId,
     addParameter,
-    addEndpointParamRel
+    addEndpointParamRel,
+    getRespCodesByEndpointID
 }

@@ -44,7 +44,6 @@ const createEndpoint = async (endpointData) => {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('endpoints');
         const insertEndpoint = await pool.request()
-                            .input('respCodeID', sql.Int, endpointData.respCodeID)
                             .input('groupID', sql.Int, endpointData.groupID)
                             .input('methodType', sql.VarChar(6), endpointData.methodType)
                             .input('path', sql.VarChar(64), endpointData.path)
@@ -102,6 +101,20 @@ const getEndpointsByGroup = async (groupID) => {
     }
 }
 
+const getRespCodesByEndpointID = async (endpointID) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const respCodes = await pool.request()
+                                        .input('endpointID', sql.Int, endpointID)
+                                        .query(sqlQueries.respCodesbyEndpointID);
+        return respCodes.recordset;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+
 module.exports = {
     getGroupById,
     getEndpointById,
@@ -109,5 +122,6 @@ module.exports = {
     createEndpoint,
     getEndpointsByGroup,
     createParameter,
-    createEndpointParamRel
+    createEndpointParamRel,
+    getRespCodesByEndpointID
 }
