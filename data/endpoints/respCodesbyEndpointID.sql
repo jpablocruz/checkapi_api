@@ -1,4 +1,5 @@
 SELECT 
+ResponseCode.respCodeID,
 ResponseCode.number,
 ResponseCode.respDescription
 FROM ResponseCode
