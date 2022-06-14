@@ -62,10 +62,35 @@ const getRespCodesByEndpointID = async (req, res, next) => {
     }
 };
 
+const addEndpointRespCodes = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const insert = await paramData.createEndpointRespCodeRel(data);
+        res.send(insert);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+const getAllRespCodes = async (req, res, next) => {
+    try
+    {
+        const respCodes = await endpointData.getAvailableRespCodes();
+        res.send(respCodes);
+    }
+    catch (error){
+        res.status(400).send(error.message);
+    }
+};
+
+
+
 module.exports = {
     addEndpoint,
     getEndpointsByGroupId,
     addParameter,
     addEndpointParamRel,
-    getRespCodesByEndpointID
+    getRespCodesByEndpointID,
+    addEndpointRespCodes,
+    getAllRespCodes
 }

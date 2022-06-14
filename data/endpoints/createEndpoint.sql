@@ -1,6 +1,5 @@
 INSERT INTO [dbo].[Endpoint]
     (
-    [respCodeID], 
     [groupID], 
     [methodType], 
     [path], 
@@ -9,7 +8,6 @@ INSERT INTO [dbo].[Endpoint]
     )
     VALUES
     (
-        1,
         @groupID,
         @methodType,
         @path,

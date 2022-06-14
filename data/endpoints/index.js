@@ -114,6 +114,30 @@ const getRespCodesByEndpointID = async (endpointID) => {
     }
 }
 
+const createEndpointRespCodeRel = async (endpointData) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const insertEndpoint = await pool.request()
+                            .input('endpointID', sql.Int, endpointData.endpointID)
+                            .input('respCodeID', sql.Int, endpointData.respCodeID)
+                            .query(sqlQueries.createEndpointRespCodes);                            
+        return insertEndpoint.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+const getAvailableRespCodes = async () => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const eventsList = await pool.request().query(sqlQueries.getRespCodes);
+        return eventsList.recordset;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
 module.exports = {
     getGroupById,
@@ -123,5 +147,7 @@ module.exports = {
     getEndpointsByGroup,
     createParameter,
     createEndpointParamRel,
-    getRespCodesByEndpointID
+    getRespCodesByEndpointID,
+    createEndpointRespCodeRel,
+    getAvailableRespCodes
 }
