@@ -1,4 +1,5 @@
 SELECT 
+    Parameter.paramID,
     Parameter.dataType
     ,Parameter.paramName
     ,Parameter.isRequired

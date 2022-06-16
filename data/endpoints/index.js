@@ -139,6 +139,48 @@ const getAvailableRespCodes = async () => {
     }
 }
 
+const editEndpoint = async (endpointID, data) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const update = await pool.request()
+                        .input('endpointID', sql.Int, endpointID)
+                        .input('endpointDescription', sql.VarChar(280), data.endpointDescription)
+                        .input('methodType', sql.VarChar(6), data.methodType)
+                        .input('path', sql.VarChar(64), data.path)
+                        .query(sqlQueries.updateEndpoint);
+        return update.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+const deleteParams = async (paramID) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const deleteParam = await pool.request()
+                            .input('paramID', sql.Int, paramID)
+                            .query(sqlQueries.deleteParams);
+        return deleteParam.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
+const deleteResponseCodesRel = async (endpointID) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const deletedResps = await pool.request()
+                            .input('endpointID', sql.Int, endpointID)
+                            .query(sqlQueries.deleteRespCodeRel);
+        return deletedResps.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = {
     getGroupById,
     getEndpointById,
@@ -149,5 +191,8 @@ module.exports = {
     createEndpointParamRel,
     getRespCodesByEndpointID,
     createEndpointRespCodeRel,
-    getAvailableRespCodes
+    getAvailableRespCodes,
+    editEndpoint,
+    deleteParams,
+    deleteResponseCodesRel
 }

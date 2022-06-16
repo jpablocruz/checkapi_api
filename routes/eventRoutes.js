@@ -72,6 +72,10 @@ router.post('/paramEndpoint',EndpointController.addEndpointParamRel);
 router.get('/respCodes',EndpointController.getAllRespCodes);
 router.get('/endpoint/respCodes/:id',EndpointController.getRespCodesByEndpointID);
 router.post('/endpoint/respCodes',EndpointController.addEndpointRespCodes);
+router.put('/endpoint/:id',EndpointController.updateEndpointData);
+router.delete('/parameter/:id',EndpointController.deleteParameter);
+router.delete('/respCodes/:id',EndpointController.deleteResponseCodes);
+
 
 //RUTAS DE GROUPS 
 router.get('/api_groups/:id', groupController.getGroupsbyId);

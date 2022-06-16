@@ -82,8 +82,35 @@ const getAllRespCodes = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 };
+const updateEndpointData = async (req, res, next) => {
+    try {
+        const endpointID =  req.params.id;
+        const data = req.body;
+        const updated = await endpointData.editEndpoint(endpointID, data);
+        res.send(updated);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 
-
+const deleteParameter = async (req, res, next) => {
+    try {
+        const paramID = req.params.id;
+        const deletedParam = await endpointData.deleteParams(paramID);
+        res.send(deletedParam);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+const deleteResponseCodes = async (req, res, next) => {
+    try {
+        const endpointID = req.params.id;
+        const deletedResps = await endpointData.deleteResponseCodesRel(endpointID);
+        res.send(deletedResps);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 
 module.exports = {
     addEndpoint,
@@ -92,5 +119,8 @@ module.exports = {
     addEndpointParamRel,
     getRespCodesByEndpointID,
     addEndpointRespCodes,
-    getAllRespCodes
+    getAllRespCodes,
+    updateEndpointData,
+    deleteParameter,
+    deleteResponseCodes
 }
