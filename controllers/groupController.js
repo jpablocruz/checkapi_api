@@ -71,6 +71,16 @@ const deleteGroup = async (req, res, next) => {
     }
 }
 
+const getGroupApiByID = async (req, res, next) => {
+    try {
+        const groupID = req.params.id;
+        const groupItem = await groupsData.getGroupApiByID(groupID);
+        res.send(groupItem);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 
 module.exports = {
     getEndpointGroups,
@@ -78,5 +88,6 @@ module.exports = {
     getEndpointParameters,
     getGroupsbyId,
     addGroup,
-    deleteGroup
+    deleteGroup,
+    getGroupApiByID
 }
