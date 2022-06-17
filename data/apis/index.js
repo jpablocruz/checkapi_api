@@ -62,10 +62,26 @@ const deleteApi = async (apiID) => {
     }
 }
 
+const updateAPIinfo = async (apiID, data) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        console.log(data.didSucceed)
+        const sqlQueries = await utils.loadSqlQueries('apis');
+        const deletedApi = await pool.request()
+                            .input('apiID', sql.Int, apiID)
+                            .input('didSucceed', sql.Bit, data.didSucceed)
+                            .query(sqlQueries.updateSLAinfo);
+        return deletedApi.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = {
     createApi,
     addApiCategoryAssociation,
     toggleApiVisibility,
     deleteApi,
+    updateAPIinfo
 }
 

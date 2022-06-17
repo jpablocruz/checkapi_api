@@ -122,6 +122,21 @@ const deleteEndpoint = async (req, res, next) => {
     }
 }
 
+const updateEndpointLastResp = async (req, res, next) => {
+    try {
+        const endpointID =  req.params.id;
+        const data = req.body;
+        const updated = await endpointData.editLastResp(endpointID, data);
+        res.send({
+            hasError: false,
+            message: "last response updated succesfully",
+            object: updated
+        })
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 
 module.exports = {
     addEndpoint,
@@ -134,5 +149,6 @@ module.exports = {
     updateEndpointData,
     deleteParameter,
     deleteResponseCodes,
-    deleteEndpoint
+    deleteEndpoint,
+    updateEndpointLastResp
 }

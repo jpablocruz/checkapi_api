@@ -155,6 +155,21 @@ const editEndpoint = async (endpointID, data) => {
     }
 }
 
+const editLastResp = async (endpointID, data) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const update = await pool.request()
+                        .input('endpointID', sql.Int, endpointID)
+                        .input('lastRespCode', sql.Int, data.lastRespCode)
+                        .input('lastRespDate', sql.VarChar(25), data.lastRespDate)
+                        .query(sqlQueries.updateLastResp);
+        return update.recordset
+    } catch (error) {
+        return error.message;
+    }
+}
+
 const deleteParams = async (paramID) => {
     try {
         let pool = await sql.connect(config.sql);
@@ -208,5 +223,6 @@ module.exports = {
     editEndpoint,
     deleteParams,
     deleteResponseCodesRel,
-    deleteEndpoint
+    deleteEndpoint,
+    editLastResp
 }

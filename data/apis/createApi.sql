@@ -4,6 +4,8 @@ INSERT INTO [dbo].[API]
         [baseUrl],
         [description],
         [status],
+        [successAns],
+        [errorAns],
         [isEnabled]
     )
 VALUES 
@@ -12,6 +14,8 @@ VALUES
         @baseUrl,
         @description,
         1, 
+        0,
+        0,
         1
     )
 

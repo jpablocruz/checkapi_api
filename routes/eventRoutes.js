@@ -10,6 +10,7 @@ const EndpointController = require('../controllers/endpointController');
 const config = require('../config');
 const toggleApiVisibilityController = require('../controllers/toggleApiVisibilityController');
 const  deleteApiController = require('../controllers/deleteApiController');
+const { createApi } = require('../data/apis');
 const app = express();
 
 app.set('llave', config.llave);
@@ -62,7 +63,9 @@ router.post('/category_api',addApiController.addApiCatRel)
 router.post('/endpoint',EndpointController.addEndpoint)
 router.put('/api_visibility',toggleApiVisibilityController.updateApiVisibility)
 router.delete('/delete_api/:id', deleteApiController.deleteApi)
+
 //RUTAS API
+router.put('/api-sla/:id', addApiController.updateAPIinfoSLA)
 
 //RUTAS ENDPOINTS ETC...
 router.get('/group/:id/endpoints', EndpointController.getEndpointsByGroupId);
@@ -75,6 +78,7 @@ router.put('/endpoint/:id',EndpointController.updateEndpointData);
 router.delete('/parameter/:id',EndpointController.deleteParameter);
 router.delete('/respCodes/:id',EndpointController.deleteResponseCodes);
 router.delete('/endpoint/:id', EndpointController.deleteEndpoint);
+router.put('/lastResp/:id', EndpointController.updateEndpointLastResp);
 
 //RUTAS DE GROUPS 
 router.get('/api_groups/:id', groupController.getGroupsbyId);

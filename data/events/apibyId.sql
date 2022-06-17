@@ -1,3 +1,6 @@
-SELECT Api.name, Api.baseUrl 
+SELECT  [name], 
+        [baseUrl],
+        [successAns],
+        [errorAns]
 FROM dbo.API 
 WHERE ApiID =  @apiID

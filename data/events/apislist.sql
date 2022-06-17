@@ -2,6 +2,8 @@ SELECT  [apiID],
         [name],
         [baseUrl],
         [description],
+        [successAns],
+        [errorAns],
         isFavorite =  (CASE WHEN EXISTS (
             SELECT * FROM [Favorites] 
             WHERE [Favorites].apiID = A.apiID 

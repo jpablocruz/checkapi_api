@@ -2,7 +2,8 @@ SELECT Groups.name
     ,Endpoint.[path]
     ,Endpoint.endpointDescription
     ,Endpoint.methodType
-    ,Endpoint.lastResp
+    ,Endpoint.lastRespCode
+    ,Endpoint.lastRespDate
     ,Endpoint.[status]
 FROM Endpoint
 JOIN Groups
