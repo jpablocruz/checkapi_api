@@ -50,8 +50,22 @@ const deleteGroup = async (groupID) => {
     }
 }
 
+const getGroupApiByID = async (groupID) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('groups');
+        const groupApiData = await pool.request()
+                                        .input('groupID', sql.Int, groupID)
+                                        .query(sqlQueries.groupApiByID);
+        return groupApiData.recordset;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 module.exports = {
     getGroups,
     createGroup,
-    deleteGroup
+    deleteGroup,
+    getGroupApiByID
 }

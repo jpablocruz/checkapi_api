@@ -80,6 +80,7 @@ router.delete('/endpoint/:id', EndpointController.deleteEndpoint);
 router.get('/api_groups/:id', groupController.getGroupsbyId);
 router.post('/group', groupController.addGroup);
 router.delete('/group/:id',groupController.deleteGroup);
+router.get('/groupApi/:id',groupController.getGroupApiByID);  //retrieves groupName and apiName to Add/Edit Endpoint
 
 
 module.exports = {
