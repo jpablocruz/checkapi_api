@@ -112,6 +112,17 @@ const deleteResponseCodes = async (req, res, next) => {
     }
 }
 
+const deleteEndpoint = async (req, res, next) => {
+    try {
+        const endpointID = req.params.id;
+        const deletedEndpoint = await endpointData.deleteEndpoint(endpointID);
+        res.send(deletedEndpoint);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
 module.exports = {
     addEndpoint,
     getEndpointsByGroupId,
@@ -122,5 +133,6 @@ module.exports = {
     getAllRespCodes,
     updateEndpointData,
     deleteParameter,
-    deleteResponseCodes
+    deleteResponseCodes,
+    deleteEndpoint
 }

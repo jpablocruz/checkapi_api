@@ -136,18 +136,6 @@ const updateUser = async (userID, data) => {
     }
 }
 
-const deleteEndpoint = async (endpointID) => {
-    try {
-        let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('events');
-        const deleteEndpoint = await pool.request()
-                            .input('endpointID', sql.Int, endpointID)
-                            .query(sqlQueries.deleteEndpoint);
-        return deleteEndpoint.recordset;
-    } catch (error) {
-        return error.message;
-    }
-}
 const deleteEvent = async (eventId) => {
     try {
         let pool = await sql.connect(config.sql);
@@ -221,12 +209,11 @@ module.exports = {
     deleteEvent,
     getApis,
     updateApi,
-    deleteEndpoint,
     login,
     getCategories,
     getApiById,
     getUsers,
     updateUser,
     createFavorite,
-    deleteFavorite,
+    deleteFavorite
 }

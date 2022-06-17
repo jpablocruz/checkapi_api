@@ -181,6 +181,19 @@ const deleteResponseCodesRel = async (endpointID) => {
     }
 }
 
+const deleteEndpoint = async (endpointID) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('endpoints');
+        const deleteEndpoint = await pool.request()
+                            .input('endpointID', sql.Int, endpointID)
+                            .query(sqlQueries.deleteEndpoint);
+        return deleteEndpoint.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = {
     getGroupById,
     getEndpointById,
@@ -194,5 +207,6 @@ module.exports = {
     getAvailableRespCodes,
     editEndpoint,
     deleteParams,
-    deleteResponseCodesRel
+    deleteResponseCodesRel,
+    deleteEndpoint
 }

@@ -46,7 +46,6 @@ router.post('/event', eventControll.addEvent);
 router.put('/event/:id', eventControll.updateEvent);
 router.put('/api/:id', eventControll.updateApi);
 router.delete('/event/:id', eventControll.deleteEvent);
-router.delete('/endpoint/:id', eventControll.deleteEndpoint);
 router.get('/categories', eventControll.getAllCategories);
 router.get('/groups/:id', groupController.getEndpointGroups);
 router.get('/categories/:id/user/:user_id', filteredAPIs.getAPIsByCategories);
@@ -75,11 +74,12 @@ router.post('/endpoint/respCodes',EndpointController.addEndpointRespCodes);
 router.put('/endpoint/:id',EndpointController.updateEndpointData);
 router.delete('/parameter/:id',EndpointController.deleteParameter);
 router.delete('/respCodes/:id',EndpointController.deleteResponseCodes);
-
+router.delete('/endpoint/:id', EndpointController.deleteEndpoint);
 
 //RUTAS DE GROUPS 
 router.get('/api_groups/:id', groupController.getGroupsbyId);
 router.post('/group', groupController.addGroup);
+router.delete('/group/:id',groupController.deleteGroup);
 
 
 module.exports = {

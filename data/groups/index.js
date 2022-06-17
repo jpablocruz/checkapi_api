@@ -37,7 +37,21 @@ const createGroup = async (groupData) => {
     }
 }
 
+const deleteGroup = async (groupID) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('groups');
+        const deleteGroup = await pool.request()
+                            .input('groupID', sql.Int, groupID)
+                            .query(sqlQueries.deleteGroup);
+        return deleteGroup.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
+
 module.exports = {
     getGroups,
-    createGroup
+    createGroup,
+    deleteGroup
 }

@@ -124,16 +124,6 @@ const deleteEvent = async (req, res, next) => {
     }
 }
 
-const deleteEndpoint = async (req, res, next) => {
-    try {
-        const endpointID = req.params.id;
-        const deletedApi = await eventData.deleteEndpoint(endpointID);
-        res.send(deletedApi);
-    } catch (error) {
-        res.status(400).send(error.message);
-    }
-}
-
 const getAllCategories = async (req, res, next) => {
     try {
         const categorylist = await eventData.getCategories();
@@ -180,12 +170,11 @@ module.exports = {
     deleteEvent,
     getAllApis,
     updateApi,
-    deleteEndpoint,
     logUser,
     getAllCategories,
     getApi,
     getAllUsers,
     updateUserRole,
     addFavorite,
-    deleteFavorite,
+    deleteFavorite
 }

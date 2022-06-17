@@ -61,11 +61,22 @@ const addGroup = async (req, res, next) => {
     }
 }
 
+const deleteGroup = async (req, res, next) => {
+    try {
+        const groupID = req.params.id;
+        const deletedGroup = await groupsData.deleteGroup(groupID);
+        res.send(deletedGroup);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 
 module.exports = {
     getEndpointGroups,
     getEndpoint,
     getEndpointParameters,
     getGroupsbyId,
-    addGroup
+    addGroup,
+    deleteGroup
 }
