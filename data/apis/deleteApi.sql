@@ -1,0 +1,2 @@
+DELETE FROM [API]
+wHERE [apiID] = @apiID
